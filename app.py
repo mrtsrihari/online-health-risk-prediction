@@ -150,21 +150,47 @@ def dashboard():
     if not data.empty:
         data["Score"] = pd.to_numeric(data["Score"], errors='coerce')
 
-    avg_score = int(data["Score"].mean()) if not data.empty else 0
-    high_risk_count = len(data[data["Risk"] == "High Risk"]) if not data.empty else 0
+    # type conversion for numeric fields
+    if not data.empty:
+        data["Score"] = pd.to_numeric(data["Score"], errors='coerce')
+        data["HR"] = pd.to_numeric(data["HR"], errors='coerce')
+        data["Temp"] = pd.to_numeric(data["Temp"], errors='coerce')
+        data["Oxygen"] = pd.to_numeric(data["Oxygen"], errors='coerce')
+
+    avg_score = int(data["Score"].mean()) if not data.empty and not pd.isna(data["Score"].mean()) else 0
+    avg_hr = int(data["HR"].mean()) if not data.empty and not pd.isna(data["HR"].mean()) else 0
+    max_temp = float(data["Temp"].max()) if not data.empty and not pd.isna(data["Temp"].max()) else 0
+    min_oxygen = float(data["Oxygen"].min()) if not data.empty and not pd.isna(data["Oxygen"].min()) else 0
+    high_risk_count = int(data[data["Risk"] == "High Risk"].shape[0]) if not data.empty else 0
 
     # Chart
     if not data.empty:
-        data["Score"].plot(kind="line")
+        data["Score"].plot(kind="line", figsize=(8, 4), color="#60a5fa")
         plt.title("Health Score Trend")
+        plt.grid(True, alpha=0.3)
+        plt.tight_layout()
         plt.savefig("static/score_chart.png")
         plt.clf()
 
-    table = data.to_html(index=False) if not data.empty else "No Data"
+        # Risk Category Pie Chart
+        risk_counts = data["Risk"].value_counts()
+        if not risk_counts.empty:
+            colors = ['#ef4444', '#f59e0b', '#10b981']  # Red, Orange, Green
+            risk_counts.plot(kind="pie", autopct='%1.1f%%', colors=colors, figsize=(6, 6))
+            plt.title("Risk Category Distribution")
+            plt.ylabel('')
+            plt.tight_layout()
+            plt.savefig("static/risk_pie_chart.png")
+            plt.clf()
+
+    table = data.to_html(index=False, classes='data-table', border=0) if not data.empty else "No Data"
 
     return render_template("dashboard.html",
                            table=table,
                            avg_score=avg_score,
+                           avg_hr=avg_hr,
+                           max_temp=max_temp,
+                           min_oxygen=min_oxygen,
                            high_risk_count=high_risk_count)
 
 # ================= SEARCH =================
