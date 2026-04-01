@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Health Monitor</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        .monitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .monitor-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .monitor-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .monitor-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .monitor-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+
+    <script>
+        setTimeout(function(){
+            location.reload();
+        }, 5000);
+    </script>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">HealthRisk</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/live">Monitor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Live Health Monitor</h1>
+    <p style="color: white; text-align: center; font-size: 0.9rem;">Auto-refreshing every 5 seconds...</p>
+
+    <div class="container" style="max-width: 800px;">
+        <div class="card">
+            <h2>Real-time Vital Signs</h2>
+            
+            <div class="monitor-grid">
+                <div class="monitor-item">
+                    <div class="monitor-label">Heart Rate</div>
+                    <div class="monitor-value pulse">{{hr}}</div>
+                    <div style="font-size: 0.8rem; color: #999;">bpm</div>
+                </div>
+                
+                <div class="monitor-item">
+                    <div class="monitor-label">Blood Pressure</div>
+                    <div class="monitor-value">{{bp}}</div>
+                    <div style="font-size: 0.8rem; color: #999;">mmHg</div>
+                </div>
+                
+                <div class="monitor-item">
+                    <div class="monitor-label">Blood Sugar</div>
+                    <div class="monitor-value">{{sugar}}</div>
+                    <div style="font-size: 0.8rem; color: #999;">mg/dL</div>
+                </div>
+                
+                <div class="monitor-item">
+                    <div class="monitor-label">Temperature</div>
+                    <div class="monitor-value">{{temp}}</div>
+                    <div style="font-size: 0.8rem; color: #999;">°C</div>
+                </div>
+                
+                <div class="monitor-item">
+                    <div class="monitor-label">Oxygen Level</div>
+                    <div class="monitor-value">{{oxygen}}</div>
+                    <div style="font-size: 0.8rem; color: #999;">%</div>
+                </div>
+                
+                <div class="monitor-item">
+                    <div class="monitor-label">Cholesterol</div>
+                    <div class="monitor-value">{{chol}}</div>
+                    <div style="font-size: 0.8rem; color: #999;">mg/dL</div>
+                </div>
+            </div>
+
+            <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e0e0e0;">
+
+            <div style="text-align: center;">
+                <div class="score-badge">
+                    Health Score: {{score}} / 100
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    {% if score >= 75 %}
+                        <div class="alert alert-success">{{risk}} - Healthy Condition</div>
+                    {% elif score >= 50 %}
+                        <div class="alert alert-warning">{{risk}} - Monitor Regularly</div>
+                    {% else %}
+                        <div class="alert alert-danger">{{risk}} - Requires Attention</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="/" class="back-link">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Risk Prediction System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">HealthRisk</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/live">Monitor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Health Risk Prediction</h1>
+
+    <div class="container">
+        <div class="card">
+            <form action="/predict" method="POST">
+                <div>
+                    <input type="text" name="name" placeholder="Full Name" required>
+                </div>
+
+                <div>
+                    <h3>Clinical Measurements</h3>
+                </div>
+
+                <input type="number" name="heart_rate" placeholder="Heart Rate (bpm)" min="0">
+                <input type="number" name="bp" placeholder="Blood Pressure (mmHg)" min="0">
+                <input type="number" name="sugar" placeholder="Blood Sugar (mg/dL)" min="0">
+                <input type="number" step="0.1" name="temperature" placeholder="Temperature (°C)" min="0">
+                <input type="number" name="oxygen" placeholder="Oxygen Level (%)" min="0" max="100">
+                <input type="number" name="cholesterol" placeholder="Cholesterol (mg/dL)" min="0">
+
+                <button type="submit">Analyze Health Risk</button>
+            </form>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h3>Quick Access</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                <a href="/search" class="btn-link" style="padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px; text-decoration: none; font-weight: 600;">Search Records</a>
+                <a href="/dashboard" class="btn-link" style="padding: 1rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border-radius: 10px; text-decoration: none; font-weight: 600;">View Dashboard</a>
+                <a href="/live" class="btn-link" style="padding: 1rem; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border-radius: 10px; text-decoration: none; font-weight: 600;">Live Monitor</a>
+                <a href="/delete" class="btn-link" style="padding: 1rem; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; border-radius: 10px; text-decoration: none; font-weight: 600;">Manage Data</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

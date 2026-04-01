@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Risk Assessment Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">HealthRisk</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/live">Monitor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Health Assessment Result</h1>
+
+    <div class="container">
+        <div class="card">
+            <h2>Patient: {{name}}</h2>
+
+            <div class="score-badge">
+                Health Score: {{score}} / 100
+            </div>
+
+            <div style="margin: 2rem 0;">
+                {% if risk == 'High Risk' %}
+                    <div class="alert alert-danger">
+                        {{message}}
+                    </div>
+                {% elif risk == 'Medium Risk' %}
+                    <div class="alert alert-warning">
+                        {{message}}
+                    </div>
+                {% else %}
+                    <div class="alert alert-success">
+                        {{message}}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div style="text-align: center; margin: 1.5rem 0;">
+                <h3>Risk Assessment</h3>
+                <p style="font-size: 1.2rem; color: #667eea; font-weight: 700;">{{risk}}</p>
+            </div>
+
+            <a href="/" class="back-link" style="display: block; text-align: center;">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Patient</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">HealthRisk</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/live">Monitor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Search Patient Records</h1>
+
+    <div class="container">
+        <div class="card">
+            <form method="POST">
+                <input type="text" name="name" placeholder="Enter patient name..." required>
+                <button type="submit">Search Patient</button>
+            </form>
+        </div>
+
+        {% if result %}
+        <div class="card">
+            <h2>Search Results</h2>
+            {{ result | safe }}
+        </div>
+        {% endif %}
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="/" class="back-link">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

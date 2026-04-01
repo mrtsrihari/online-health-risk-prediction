@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Health Risk System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">HealthRisk</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/live">Monitor</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Dashboard Analytics</h1>
+
+    <div class="container" style="max-width: 1000px;">
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Average Score</div>
+                <div class="stat-value">{{avg_score}}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Heart Rate (Avg)</div>
+                <div class="stat-value">{{avg_hr}}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Max Temp</div>
+                <div class="stat-value">{{max_temp}}°C</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Min Oxygen</div>
+                <div class="stat-value">{{min_oxygen}}%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">High Risk Count</div>
+                <div class="stat-value" style="color: #ff4757;">{{high_risk_count}}</div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="card">
+            <h2>Health Score Distribution</h2>
+            <div class="image-container">
+                <img src="/static/score_chart.png" alt="Score Chart">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Risk Category Analysis</h2>
+            <div class="image-container">
+                <img src="/static/bar_chart.png" alt="Bar Chart">
+            </div>
+        </div>
+
+        <!-- Records Table -->
+        <div class="card">
+            <h2>Patient Records</h2>
+            {{ table | safe }}
+            <a href="/" class="back-link" style="display: block; text-align: center; margin-top: 1.5rem;">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
