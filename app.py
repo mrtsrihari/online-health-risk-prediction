@@ -35,6 +35,10 @@ class HealthRiskSystem:
                 score -= 15
             elif bp > 120:
                 score -= 8
+            elif bp < 90:
+                score -= 15
+            elif bp < 110:
+                score -= 8
 
         # Sugar
         if sugar:
@@ -42,6 +46,10 @@ class HealthRiskSystem:
             if sugar > 180:
                 score -= 15
             elif sugar > 140:
+                score -= 8
+            elif sugar < 70:
+                score -= 15
+            elif sugar < 90:
                 score -= 8
 
         # Temperature
